@@ -10,6 +10,13 @@ print(pastel.colorize "<u b i #FF6961>foo</# u> <#6DCE80>bar</# i> <#779ECB>baz<
 
 ### Docs
 
+#### pastel(mode: `string`): `table`
+Loads pastel in choosen mode
+Avalible modes:
+- truecolor
+- 256-color
+- ansi
+
 #### colorize(str: `string`): `string`
 Parses tags in string and returns it
 
