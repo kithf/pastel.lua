@@ -136,22 +136,22 @@ local load_truecolor = function()
         
         if c == " " or c == ">" then
           tag = slow(tag)
-          if ssub(tag, 1,3) == "rgb" then
+          if not _not and ssub(tag, 1,3) == "rgb" then
             local r, g, b = smatch(tag, "rgb%((%d+),(%d+),(%d+)%)")
             tins(buf, "\27[38;2;"..r..";"..g..";"..b.."m")
-          elseif ssub(tag,1,6) == "bg_rgb" then
+          elseif not _not and ssub(tag,1,6) == "bg_rgb" then
             local r, g, b = smatch(tag, "bg_rgb%((%d+),(%d+),(%d+)%)")
             tins(buf, "\27[48;2;"..r..";"..g..";"..b.."m")
-          elseif ssub(tag,1,5) == "u_rgb" then
+          elseif not _not and ssub(tag,1,5) == "u_rgb" then
             local r, g, b = smatch(tag, "u_rgb%((%d+),(%d+),(%d+)%)")
             tins(buf, "\27[58;2;"..r..";"..g..";"..b.."m")
-          elseif ssub(tag,1,1) == "#" then
+          elseif not _not and ssub(tag,1,1) == "#" then
             local r, g, b = to_rgb(tonumber(ssub(tag,2), 16))
             tins(buf, "\27[38;2;"..r..";"..g..";"..b.."m")
-          elseif ssub(tag,1,3) == "bg#" then
+          elseif not _not and ssub(tag,1,3) == "bg#" then
             local r, g, b = to_rgb(tonumber(ssub(tag,4), 16))
             tins(buf, "\27[48;2;"..r..";"..g..";"..b.."m")
-          elseif ssub(tag,1,2) == "u#" then
+          elseif not _not and ssub(tag,1,2) == "u#" then
             local r, g, b = to_rgb(tonumber(ssub(tag,3), 16))
             tins(buf, "\27[58;2;"..r..";"..g..";"..b.."m")
           else
@@ -175,7 +175,7 @@ local load_truecolor = function()
   end
   
   local colorize = function(str)
-    return parse_tags("</>"..str.."</>")
+    return parse_tags(sfmt("</>%s</>", str))
   end
 
   return {
